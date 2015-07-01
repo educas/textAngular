@@ -295,6 +295,7 @@ textAngular.directive("textAngular", [
 				scope.hideResizeOverlay = function(){
 					scope.displayElements.resize.anchors[3].off('mousedown', _resizeMouseDown);
 					scope.displayElements.resize.overlay.css('display', '');
+					scope.updateTaBindtaTextElement();
 				};
 
 				// allow for insertion of custom directives on the textarea and div
