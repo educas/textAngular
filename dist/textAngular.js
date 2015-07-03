@@ -2,7 +2,7 @@
 @license textAngular
 Author : Austin Anderson
 License : 2013 MIT
-Version 1.3.12
+Version 1.3.15
 
 See README.md or https://github.com/fraywing/textAngular/wiki for requirements and use.
 */
@@ -2061,15 +2061,15 @@ textAngular.directive("textAngular", [
 								y: Math.max(0, startPosition.height + (event.clientY - startPosition.y))
 							};
 							
-							if(event.shiftKey){
-								// keep ratio
+							var keepRatio = (attrs.taImageResizeKeepAspectRatio !== undefined);
+							if(keepRatio || event.shiftKey) {
 								var newRatio = pos.y / pos.x;
 								pos.x = ratio > newRatio ? pos.x : pos.y / ratio;
 								pos.y = ratio > newRatio ? pos.x * ratio : pos.y;
 							}
 							var el = angular.element(_el);
-							el.attr('height', Math.max(0, pos.y));
-							el.attr('width', Math.max(0, pos.x));
+							el.css('height', Math.round(Math.max(0, pos.y)));
+							el.css('width', Math.round(Math.max(0, pos.x)));
 							
 							// reflow the popover tooltip
 							scope.reflowResizeOverlay(_el);
@@ -2085,6 +2085,7 @@ textAngular.directive("textAngular", [
 						event.preventDefault();
 					};
 
+					scope.displayElements.resize.anchors[3].off('mousedown');
 					scope.displayElements.resize.anchors[3].on('mousedown', _resizeMouseDown);
 
 					scope.reflowResizeOverlay(_el);
@@ -2094,6 +2095,7 @@ textAngular.directive("textAngular", [
 				scope.hideResizeOverlay = function(){
 					scope.displayElements.resize.anchors[3].off('mousedown', _resizeMouseDown);
 					scope.displayElements.resize.overlay.css('display', '');
+					scope.updateTaBindtaTextElement();
 				};
 
 				// allow for insertion of custom directives on the textarea and div
@@ -2877,4 +2879,5 @@ textAngular.directive('textAngularToolbar', [
 			}
 		};
 	}
-]);})();
+]);
+})();
