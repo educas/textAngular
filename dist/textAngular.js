@@ -2,7 +2,7 @@
 @license textAngular
 Author : Austin Anderson
 License : 2013 MIT
-Version 1.3.16
+Version 1.3.17
 
 See README.md or https://github.com/fraywing/textAngular/wiki for requirements and use.
 */
@@ -1613,7 +1613,7 @@ angular.module('textAngular.taBind', ['textAngular.factories', 'textAngular.DOM'
 					element.on('focus', scope.events.focus = function(){
 						_focussed = true;
 						element.removeClass('placeholder-text');
-						scope.updateTaBindtaTextElement();
+						_reApplyOnSelectorHandlers();
 					});
 					
 					element.on('mouseup', scope.events.mouseup = function(){
