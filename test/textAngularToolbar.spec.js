@@ -91,6 +91,16 @@ describe('textAngularToolbar', function(){
 		
 		describe('respects the Class attribute taToolbarActiveButtonClass', function(){
 			it('on an active button', inject(function($rootScope, $compile, textAngularManager){
+				var rangeMock = {
+					commonAncestorContainer: "<p>some text</p>",
+					endContainer: "<p>some text</p>",
+					startContainer: "<p>some text</p>"
+				};
+				var rangeObjectMock = {
+					getRangeAt: function(){return rangeMock;}
+				};
+				spyOn(rangy, 'getSelection').andReturn(rangeObjectMock);
+
 				var element = $compile('<text-angular-toolbar name="test" ta-toolbar-active-button-class="test-class"></text-angular-toolbar>')($rootScope);
 				var toolbarScope = textAngularManager.retrieveToolbar('test');
 				toolbarScope.disabled = false;
@@ -105,6 +115,16 @@ describe('textAngularToolbar', function(){
 			}));
 			
 			it('via text-angular on an active button', inject(function($rootScope, $compile, textAngularManager){
+				var rangeMock = {
+					commonAncestorContainer: "<p>some text</p>",
+					endContainer: "<p>some text</p>",
+					startContainer: "<p>some text</p>"
+				};
+				var rangeObjectMock = {
+					getRangeAt: function(){return rangeMock;}
+				};
+				spyOn(rangy, 'getSelection').andReturn(rangeObjectMock);
+
 				var element = $compile('<text-angular name="test" ta-toolbar-active-button-class="test-class"></text-angular>')($rootScope);
 				var toolbarScope = textAngularManager.retrieveToolbarsViaEditor('test')[0];
 				toolbarScope.disabled = false;
