@@ -1,3 +1,12 @@
+<a name"1.3.19"></a>
+### 1.3.19 (2015-07-07)
+
+
+#### Features
+
+* **taToolFunctions:** Create value provider for sharable functions ([9c4aba4b](https://github.com/fraywing/textAngular/commit/9c4aba4b))
+
+
 <a name="1.3.11"></a>
 ### 1.3.11 (2015-03-16)
 
