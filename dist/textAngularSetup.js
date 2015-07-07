@@ -434,21 +434,24 @@ angular.module('textAngularSetup', [])
 		iconclass: 'fa fa-align-left',
 		tooltiptext: taTranslations.justifyLeft.tooltip,
 		action: function(){
-			return this.$editor().wrapSelection("justifyLeft", null);
+			var elm = angular.element(taSelection.getSelectionElement());
+			if (elm) {
+				elm.css("text-align", "left");
+			}
+			else {
+				return this.$editor().wrapSelection("justifyLeft", null);
+			}
 		},
 		activeState: function(commonElement){
 			var result = false;
-			if(commonElement) result =
-				commonElement.css('text-align') === 'left' ||
-				commonElement.attr('align') === 'left' ||
-				(
-					commonElement.css('text-align') !== 'right' &&
-					commonElement.css('text-align') !== 'center' &&
-					commonElement.css('text-align') !== 'justify' &&
-					!this.$editor().queryCommandState('justifyRight') &&
-					!this.$editor().queryCommandState('justifyCenter')
-				) && !this.$editor().queryCommandState('justifyFull');
-			result = result || this.$editor().queryCommandState('justifyLeft');
+			var elm = angular.element(taSelection.getSelectionElement());
+			var elementTextAlign = elm.css('text-align');
+			if (elementTextAlign === 'start' || elementTextAlign === '') {
+				result = result || elm.css('direction') === 'ltr';
+			}
+			else {
+				result = result || elementTextAlign === 'left';
+			}
 			return result;
 		}
 	});
@@ -456,12 +459,24 @@ angular.module('textAngularSetup', [])
 		iconclass: 'fa fa-align-right',
 		tooltiptext: taTranslations.justifyRight.tooltip,
 		action: function(){
-			return this.$editor().wrapSelection("justifyRight", null);
+			var elm = angular.element(taSelection.getSelectionElement());
+			if (elm) {
+				elm.css("text-align", "right");
+			}
+			else {
+				return this.$editor().wrapSelection("justifyRight", null);
+			}
 		},
 		activeState: function(commonElement){
 			var result = false;
-			if(commonElement) result = commonElement.css('text-align') === 'right';
-			result = result || this.$editor().queryCommandState('justifyRight');
+			var elm = angular.element(taSelection.getSelectionElement());
+			var elementTextAlign = elm.css('text-align');
+			if (elementTextAlign === 'start' || elementTextAlign === '') {
+				result = result || elm.css('direction') === 'rtl';
+			}
+			else {
+				result = result || elementTextAlign === 'right';
+			}
 			return result;
 		}
 	});
@@ -469,13 +484,17 @@ angular.module('textAngularSetup', [])
 		iconclass: 'fa fa-align-center',
 		tooltiptext: taTranslations.justifyCenter.tooltip,
 		action: function(){
-			return this.$editor().wrapSelection("justifyCenter", null);
+			var elm = angular.element(taSelection.getSelectionElement());
+			if (elm) {
+				elm.css("text-align", "center");
+			}
+			else {
+				return this.$editor().wrapSelection("justifyCenter", null);
+			}
 		},
 		activeState: function(commonElement){
-			var result = false;
-			if(commonElement) result = commonElement.css('text-align') === 'center';
-			result = result || this.$editor().queryCommandState('justifyCenter');
-			return result;
+			var elm = angular.element(taSelection.getSelectionElement());
+			return elm.css('text-align') === 'center';
 		}
 	});
 	taRegisterTool('indent', {
