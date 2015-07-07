@@ -1,3 +1,12 @@
+<a name"1.3.20"></a>
+### 1.3.20 (2015-07-07)
+
+
+#### Bug Fixes
+
+* **taToolFunctions:** Convert taToolFunctions to factory ([c3c5e2f8](https://github.com/fraywing/textAngular/commit/c3c5e2f8))
+
+
 <a name"1.3.19"></a>
 ### 1.3.19 (2015-07-07)
 
